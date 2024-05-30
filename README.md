@@ -39,26 +39,45 @@ From Alphabet Soup's business team, a CSV file has been provided containing data
 
    2. What variable(s) are the features for your model?
 
-   * The variables that are features in the model are all columns excluding `IS_SUCCESSFUL`, which are:
+   * The variables that are features in the model are all columns excluding 'IS_SUCCESSFUL', which are:
 
-    * **EIN** and **NAME**—Identification columns
+  * **EIN** and **NAME**—Identification columns
 
-    * **APPLICATION_TYPE**—Alphabet Soup application type
+  * **APPLICATION_TYPE**—Alphabet Soup application type
  
-    * **AFFILIATION**—Affiliated sector of industry
+  * **AFFILIATION**—Affiliated sector of industry
 
-    * **CLASSIFICATION**—Government organization classification
+  * **CLASSIFICATION**—Government organization classification
 
-    * **USE_CASE**—Use case for funding
+  * **USE_CASE**—Use case for funding
 
-    * **ORGANIZATION**—Organization type
+  * **ORGANIZATION**—Organization type
+
+  * **STATUS**—Active status
+
+  * **INCOME_AMT**—Income classification
+
+  * **SPECIAL_CONSIDERATIONS**—Special considerations for application
+
+  * **ASK_AMT**—Funding amount requested
+
+  3. What variable(s) should be removed from the input data because they are neither targets nor features?
+
+   * The variables `EIN` and `NAME` were removed from the input data becuase they are not relevant features of the analysis.
+     
+**Compiling, Training, and Evaluating the Model**
+ 1. How many neurons, layers, and activation functions did you select for your neural network model, and why?
+    
+    * For the optimized neural network model I selected three hidden layers with neuron amounts of 20, 25, and 5. Initally, in the starter code I tested 2 hidden layers with neuron amounts 95, and 30, which produced an accuracy score of .7299 (roughly 73%), realtively close to the target of 75% or higher. I used TensorFlow to test different different layers and neuron combinations and ran the model multiple times, changing the neruon amounts in increments of 10 and 5. Eventually the neuron amounts 20, 25, and 5 produced an accuracy score of 0.7305, which was slightly higher. Although it is not greater than 75%, this was the closest I could get it after running numerous trials. For the first two hidden layers I used the activation function ReLu to improve performance and explore non-linearity. For the third hidden layer, I used sigmoid because it is the most appropriate for binary classification tasks. For the output layer I also used the sigmoid activation function because I needed the output to fall between 0 and 1.
+
+ 2. Were you able to achieve the target model performance?
+
+    * I was only able to acheive an accuracy score of around 73%, which falls just short of the target accuracy score of 75%.
+
+ 3. What steps did you take in your attempts to increase model performance?
+
+    * I started by dropping the 'EIN' and 'NAME' columns to eliminate variables that could decrease accuracy. I also selected a cutoff value and generated a list of application types to be replaced (application_types_to_replace). This approach ensured that any application type with fewer than 500 occurrences is replaced with "Other". Similarly, a cutoff value was determined for the CLASSIFICATION column, and any classification with fewer than 1000 occurrences was replaced with "Other".
   
-    * **STATUS**—Active status
+**Summary**
 
-    * **INCOME_AMT**—Income classification
-
-    * **SPECIAL_CONSIDERATIONS**—Special considerations for application
-
-    * **ASK_AMT**—Funding amount requested
-
-
+ * The deep learning model was able to achieve an accuracy score of 73% in classifying successful organizations based on their features. To optimize the model, several columns were dropped, categorical variables underwent a binning process, and hidden layers and neuron amounts were adjusted with each trial to improve accuracy. Looking at potential different learning models, ensemble methods like Random Forest or Gradient Boosting could be more advantageous for this analysis compared to neural networks due to their robustness to overfitting, inherent feature importance analysis, ability to handle non-linear relationships, ease of interpretation, and efficient performance on diverse datasets.
